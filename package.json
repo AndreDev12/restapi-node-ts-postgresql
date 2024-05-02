@@ -4,7 +4,7 @@
   "description": "Desarrollo de una REST API con Express.js, TypeScript y PostgreSQL.",
   "main": "index.js",
   "scripts": {
-    "dev": "tsnd --respawn --clear src/index.ts",
+    "dev": "tsnd --respawn --clear --env-file .env.local src/index.ts",
     "build": "tsc",
     "start": "node --env-file .env.local dist/index.js"
   },
