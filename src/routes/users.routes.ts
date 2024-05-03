@@ -1,5 +1,7 @@
 import { Router } from 'express';
 
+import { validatePartialUser, validateUser } from '../schemas/users';
+import type { UserProps } from '../schemas/users';
 import { pool } from '../db';
 
 const router = Router();
@@ -28,7 +30,11 @@ router.get('/users/:id', async (req, res) => {
 
 router.post('/users', async (req, res) => {
   try {
-    const { id, name, email } = req.body;
+    const { data, error } = validateUser(req.body as UserProps);
+    if (data === undefined) {
+      return res.status(505).json({ message: error });
+    }
+    const { id, name, email } = data;
     const { rows } = await pool.query(
       'INSERT INTO users(id, name, email) VALUES($1, $2, $3) RETURNING *',
       [id, name, email]
@@ -49,21 +55,26 @@ router.delete('/users/:id', async (req, res) => {
     return res.status(404).json({ message: 'User not found' });
   }
 
-  // res.send('User deleted');
   res.sendStatus(204);
 });
 
 router.put('/users/:id', async (req, res) => {
-  const { id, name, email } = req.body;
-
-  await pool.query('UPDATE users SET id=$1, name=$2, email=$3 WHERE id=$4', [
-    id,
-    name,
-    email,
-    req.params.id,
-  ]);
-
-  res.send(`Actualizando usuario ${req.params.id}`);
+  try {
+    const { id } = req.params;
+    const { data, error } = validatePartialUser(req.body);
+    if (data === undefined) {
+      return res.status(505).json(error);
+    }
+    const { rows } = await pool.query('SELECT * FROM users WHERE id=$1', [id]);
+    const { userId = id, name, email } = rows[0];
+    const updatedRecord = await pool.query(
+      'UPDATE users SET id=$1, name=$2, email=$3 WHERE id=$4 RETURNING *',
+      [data.id ?? userId, data.name ?? name, data.email ?? email, id]
+    );
+    res.json(updatedRecord.rows[0]);
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 export default router;

@@ -9,20 +9,20 @@ POST http://localhost:4000/users
 content-type: application/json
 
 {
-    "id": 1,
-    "name": "John Doe",
-    "email": "tdddessdgtddn@gmail.com"
+    "id": 3,
+    "name": "paz",
+    "email": "paz@gmail.com"
 }
 
 ### Eliminar un usuario
-DELETE http://localhost:4000/users/1
+DELETE http://localhost:4000/users/10
 
 ### Actualizar los datos del usuario
-PUT http://localhost:4000/users/1
+PUT http://localhost:4000/users/2
 content-type: application/json
 
 {
     "id": 2,
-    "name": "selena",
-    "email": "selena@gmail.com"
+    "name": "jaena",
+    "email": "jaena@gmail.com"
 }
