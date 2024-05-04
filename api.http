@@ -2,27 +2,27 @@
 GET http://localhost:4000/users
 
 ### Obtener un usuario por id
-GET http://localhost:4000/users/3
+GET http://localhost:4000/users/2
 
 ### Crear un usuario
 POST http://localhost:4000/users
 content-type: application/json
 
 {
-    "id": 3,
+    "id": 1,
     "name": "paz",
-    "email": "paz@gmail.com"
+    "email": "padz@gmail.com"
 }
 
 ### Eliminar un usuario
-DELETE http://localhost:4000/users/10
+DELETE http://localhost:4000/users/2
 
 ### Actualizar los datos del usuario
-PUT http://localhost:4000/users/2
+PUT http://localhost:4000/users/7
 content-type: application/json
 
 {
     "id": 2,
-    "name": "jaena",
-    "email": "jaena@gmail.com"
+    "name": "aaa",
+    "email": "aaaa@gmail.com"
 }

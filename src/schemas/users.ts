@@ -1,10 +1,6 @@
 import { z } from 'zod';
 
-export interface UserProps {
-  id: number;
-  name: string;
-  email: string;
-}
+import type { UserProps } from '../types/types';
 
 const userSchema = z.object({
   id: z
