@@ -41,8 +41,10 @@ export class UserController {
         [id, name, email]
       );
       res.json(rows[0]);
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      if (error?.code === '23505') {
+        res.status(409).json({ message: error.detail });
+      }
     }
   }
 
@@ -83,7 +85,9 @@ export class UserController {
       res.json(updatedRecord.rows[0]);
     } catch (error: any) {
       if (error.code === '23505') {
-        res.json({ message: `Ya existe la llave (id)=(${dataId}).` });
+        res
+          .status(409)
+          .json({ message: `Ya existe la llave (id)=(${dataId}).` });
       }
     }
   }
