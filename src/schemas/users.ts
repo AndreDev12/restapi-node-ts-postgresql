@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import type { UserProps } from '../types/types';
+import type { UserRequiredProps } from '../types';
 
 const userSchema = z.object({
   id: z
@@ -22,7 +22,7 @@ const userSchema = z.object({
     .email({ message: 'The email entered is not correct' }),
 });
 
-export function validateUser(input: UserProps) {
+export function validateUser(input: UserRequiredProps) {
   return userSchema.safeParse(input);
 }
 

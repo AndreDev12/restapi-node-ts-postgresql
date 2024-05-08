@@ -2,13 +2,18 @@
   "name": "restapi-node-ts-postgresql",
   "version": "1.0.0",
   "description": "Desarrollo de una REST API con Express.js, TypeScript y PostgreSQL.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "dev": "tsnd --respawn --clear --env-file .env.local src/index.ts",
     "build": "tsc",
     "start": "node --env-file .env.local dist/index.js"
   },
-  "keywords": [],
+  "keywords": [
+    "express",
+    "typescript",
+    "postgresql",
+    "mvc"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
