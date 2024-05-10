@@ -9,9 +9,9 @@ POST http://localhost:4000/users
 content-type: application/json
 
 {
-    "id": 5,
-    "name": "ricardo",
-    "email": "ricardo@gmail.com"
+    "id": 6,
+    "name": "david",
+    "email": "david@gmail.com"
 }
 
 ### Eliminar un usuario
